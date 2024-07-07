@@ -20,18 +20,18 @@
 
 // Create a function to define size base on earthquake magnitude
     function get_size(magnitude){
-        let size = magnitude * 100000;
+        let size = magnitude * 75000;
         return size;
     };
 
 // Create a function to define color based on earthquake deepth
     function get_color(depth){
-        if (depth >= 90) {return "#154360"}
-        if (depth >= 70) {return "#42595A"}
-        if (depth >= 50) {return "#6F6F54"}
-        if (depth >= 30) {return "#9B844D"}
-        if (depth >= 10) {return "#C89A47"}
-        if (depth < 10) {return "#F5B041"}
+        if (depth >= 90) {return "#F54952"}
+        if (depth >= 70) {return "#AE2D68"}
+        if (depth >= 50) {return "#660F56"}
+        if (depth >= 30) {return "#280659"}
+        if (depth >= 10) {return "#341671"}
+        if (depth < 10) {return "#422680"}
     };
 
 // Fetch the JSON data
@@ -68,3 +68,20 @@
                     circle.bindPopup(earthquake_information);
             };
     });
+
+// Create color legend for the Earthquake Depth
+    var legend = L.control({ position: "bottomleft" });
+
+    legend.onAdd = function(map) {
+      var div = L.DomUtil.create("div", "legend");
+      div.innerHTML += "<h4>Earthquake Depth</h4>";
+      div.innerHTML += '<i style="display: inline-block; width: 20px; height: 20px; background-color: #422680;"></i><span> -10 - 10</span><br>';
+      div.innerHTML += '<i style="display: inline-block; width: 20px; height: 20px; background-color: #341671;"></i><span>  10 - 30</span><br>';
+      div.innerHTML += '<i style="display: inline-block; width: 20px; height: 20px; background-color: #280659;"></i><span>  30 - 50</span><br>';
+      div.innerHTML += '<i style="display: inline-block; width: 20px; height: 20px; background-color: #660F56;"></i><span>  50 - 70</span><br>';
+      div.innerHTML += '<i style="display: inline-block; width: 20px; height: 20px; background-color: #AE2D68;"></i><span>  70 - 90</span><br>';
+      div.innerHTML += '<i style="display: inline-block; width: 20px; height: 20px; background-color: #F54952;"></i><span>  90+</span><br>';
+      return div;
+    };
+    
+    legend.addTo(my_map);
